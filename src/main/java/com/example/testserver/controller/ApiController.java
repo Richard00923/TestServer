@@ -43,12 +43,6 @@ public class ApiController {
         return test1.userResponse;
     }
 
-//    @GetMapping("/users/name")
-//    public List<String> findByArticlesSizeGreaterThan() {
-//        List<User> userRep =userRepository.findByArticlesSizeGreaterThan(3);
-//        System.out.println(userRep.size());
-//        return null;
-//    }
     @GetMapping("/users/names-with-more-than-3-articles/{number}")
     public List<String> getUsersWithMoreThanThreeArticles(@PathVariable int number) {
         List<User> users = userRepository.findUsersByArticleCountGreaterThan(number);
