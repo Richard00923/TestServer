@@ -1,7 +1,6 @@
 package com.example.testserver.entity;
-
 import jakarta.persistence.*;
-
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,15 +11,38 @@ public class User {
     private int id;
     private String name;
     private int age;
+    private int articleCount;
+
+    public int getArticleCount() {
+        return articleCount;
+    }
+
+    public void setArticleCount(int articleCount) {
+        this.articleCount = articleCount;
+    }
+
+    public User(int id, String name, int age, List<Article> articles) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.articleCount=articles.size();
+        this.articles.addAll(articles);
+    }
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Article> articles;
+    private List<Article> articles = new ArrayList<>();
+
+    public User() {
+    }
+
+    public User(int id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -39,11 +61,11 @@ public class User {
         this.age = age;
     }
 
-    public List<Article> getArticles() {
-        return articles;
-    }
-
     public void setArticles(List<Article> articles) {
         this.articles = articles;
+    }
+
+    public List<Article> getArticles() {
+        return articles;
     }
 }

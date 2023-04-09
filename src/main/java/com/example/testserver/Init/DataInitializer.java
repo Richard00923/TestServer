@@ -33,16 +33,21 @@ public class DataInitializer implements CommandLineRunner {
             user.setAge(random.nextInt(50) + 18);
 
             List<Article> articles = new ArrayList<>();
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < Math.random()*6; j++) {
                 Article article = new Article();
                 article.setText("Article " + (j + 1) + " by " + user.getName());
                 article.setColor(Color.values()[random.nextInt(Color.values().length)]);
                 article.setUser(user);
                 articles.add(article);
             }
+            user.setArticleCount(articles.size());
             user.setArticles(articles);
             users.add(user);
+
+
+
         }
+        System.out.println(users.get(1).getArticleCount());
 
         userRepository.saveAll(users);
     }

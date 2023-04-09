@@ -1,8 +1,9 @@
 package com.example.testserver.entity;
-
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 @Table (name="`article`")
 public class Article {
     @Id
@@ -16,6 +17,15 @@ public class Article {
     @JoinColumn(name= "user_id")
     private User user;
 
+
+    public Article() {
+    }
+
+    public Article(int id, String text, Color color) {
+        this.id = id;
+        this.text = text;
+        this.color = color;
+    }
 
     public int getId() {
         return id;

@@ -1,12 +1,14 @@
 package com.example.testserver.controller;
+import com.example.testserver.model.UserResponseMethod;
 import com.example.testserver.repository.ArticleRepository;
 import com.example.testserver.repository.UserRepository;
 import com.example.testserver.entity.Article;
 import com.example.testserver.entity.Color;
 import com.example.testserver.entity.User;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -18,12 +20,13 @@ public class ApiController {
         this.userRepository = userRepository;
         this.articleRepository = articleRepository;
     }
-//    private final ArticleRepository articleRepository;
 
     @GetMapping("/users/age/{age}")
     public List<User> getUsersByAge(@PathVariable int age) {
         List<User> userRep =userRepository.findByAgeGreaterThan(age);
-        return userRep;
+        List<Article> articleRep=articleRepository.findAll();
+        UserResponseMethod test1 = new UserResponseMethod(userRep,articleRep);
+        return test1.userResponse;
     }
 
     @GetMapping("/hello")
@@ -32,18 +35,31 @@ public class ApiController {
     }
 
     @GetMapping("/users/color/{color}")
-    public List<User> getUsersByArticleColor(@PathVariable Color color) {
-        return userRepository.findByArticlesColor(color);
+    public List<User> findByArticlesColor(@PathVariable Color color) {
+        List<User> userRep =userRepository.findByArticlesColor(color);
+        System.out.println(userRep.size());
+        List<Article> articleRep=articleRepository.findAll();
+        UserResponseMethod test1 = new UserResponseMethod(userRep,articleRep);
+        return test1.userResponse;
     }
 
 //    @GetMapping("/users/name")
-//    public List<String> getUniqueUserNamesWithMoreThanThreeArticles() {
-//        return userRepository.findByArticlesSizeGreaterThan(3)
-//                .stream()
-//                .map(User::getName)
-//                .distinct()
-//                .collect(Collectors.toList());
+//    public List<String> findByArticlesSizeGreaterThan() {
+//        List<User> userRep =userRepository.findByArticlesSizeGreaterThan(3);
+//        System.out.println(userRep.size());
+//        return null;
 //    }
+    @GetMapping("/users/names-with-more-than-3-articles/{number}")
+    public List<String> getUsersWithMoreThanThreeArticles(@PathVariable int number) {
+        List<User> users = userRepository.findUsersByArticleCountGreaterThan(number);
+        List<String> names = new ArrayList<>();
+        for (User user : users) {
+            names.add(user.getName());
+            System.out.println(user.getName());
+        }
+        System.out.println(users);
+        return names;
+    }
 
     @PostMapping("/users")
     public User saveUser(@RequestBody User user) {
