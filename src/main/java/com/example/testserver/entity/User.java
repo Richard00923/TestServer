@@ -1,10 +1,12 @@
 package com.example.testserver.entity;
-import jakarta.persistence.*;
+
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table (name="`user`")
+@Table(name="`user`")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
