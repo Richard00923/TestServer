@@ -1,11 +1,14 @@
 package com.example.testserver.entity;
+
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name="`article`")
+@Table(name = "`article`")
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,9 +16,10 @@ public class Article {
     private String text;
     @Enumerated(EnumType.ORDINAL)
     private Color color;
-
+    @Getter
+    @Setter
     @ManyToOne
-    @JoinColumn(name= "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
 
@@ -27,36 +31,6 @@ public class Article {
         this.text = text;
         this.color = color;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
+
+

@@ -23,7 +23,6 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        System.out.println("Hello");
         Random random = new Random();
         List<User> users = new ArrayList<>();
 
@@ -47,7 +46,6 @@ public class DataInitializer implements CommandLineRunner {
 
 
         }
-        System.out.println(users.get(1).getArticleCount());
 
         userRepository.saveAll(users);
     }

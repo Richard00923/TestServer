@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="`user`")
+
+@Table(name = "`user`")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,6 +15,7 @@ public class User {
     private String name;
     private int age;
     private int articleCount;
+
 
     public int getArticleCount() {
         return articleCount;
@@ -27,9 +29,10 @@ public class User {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.articleCount=articles.size();
+        this.articleCount = articles.size();
         this.articles.addAll(articles);
     }
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Article> articles = new ArrayList<>();
@@ -47,6 +50,10 @@ public class User {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -55,6 +62,7 @@ public class User {
         this.name = name;
     }
 
+
     public int getAge() {
         return age;
     }
@@ -62,6 +70,7 @@ public class User {
     public void setAge(int age) {
         this.age = age;
     }
+
 
     public void setArticles(List<Article> articles) {
         this.articles = articles;

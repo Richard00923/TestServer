@@ -1,10 +1,11 @@
 package com.example.testserver.controller;
-import com.example.testserver.model.UserResponseMethod;
-import com.example.testserver.repository.ArticleRepository;
-import com.example.testserver.repository.UserRepository;
+
 import com.example.testserver.entity.Article;
 import com.example.testserver.entity.Color;
 import com.example.testserver.entity.User;
+import com.example.testserver.model.UserResponseMethod;
+import com.example.testserver.repository.ArticleRepository;
+import com.example.testserver.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -25,8 +26,8 @@ public class ApiController {
     public List<User> getUsersByAge(@PathVariable int age) {
         List<User> userRep =userRepository.findByAgeGreaterThan(age);
         List<Article> articleRep=articleRepository.findAll();
-        UserResponseMethod test1 = new UserResponseMethod(userRep,articleRep);
-        return test1.userResponse;
+        UserResponseMethod userReview = new UserResponseMethod(userRep,articleRep);
+        return userReview.userResponse;
     }
 
     @GetMapping("/hello")
@@ -39,8 +40,8 @@ public class ApiController {
         List<User> userRep =userRepository.findByArticlesColor(color);
         System.out.println(userRep.size());
         List<Article> articleRep=articleRepository.findAll();
-        UserResponseMethod test1 = new UserResponseMethod(userRep,articleRep);
-        return test1.userResponse;
+        UserResponseMethod userReview = new UserResponseMethod(userRep,articleRep);
+        return userReview .userResponse;
     }
 
     @GetMapping("/users/names-with-more-than-3-articles/{number}")
@@ -49,10 +50,9 @@ public class ApiController {
         List<String> names = new ArrayList<>();
         for (User user : users) {
             names.add(user.getName());
-            System.out.println(user.getName());
         }
-        System.out.println(users);
         return names;
+
     }
 
     @PostMapping("/users")
