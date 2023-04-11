@@ -80,4 +80,4 @@ Replace TOKEN with the JWT token obtained in the previous step and use it in the
 ```curl -H "Authorization: Bearer TOKEN" http://localhost:8080/api/users/with-more-than-three-articles```
 # Postman Collection
 You can also use Postman to test the API endpoints. Import the Postman collection from the following link:
-https://github.com/Richard00923/TestServer/blob/master/TestServer.postman_collection.json
+https://github.com/Richard00923/TestServer/blob/master/TestServer.postman_collection
